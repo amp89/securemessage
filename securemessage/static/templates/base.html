@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Alex M Peterson's Software Development site.">
+    <meta name="author" content="Alex Peterson">
+
+    <title>
+      {% block title %}
+      App thing
+      {% endblock %}
+    </title>
+
+    {% block stylesheets %}
+
+    {% endblock %}
+
+    <!--<script src="{% static '/js/bootstrap.js' %}"></script>-->
+
+</head>
+
+<body>
+
+    <nav>
+        <a href="/">
+            <div class="row title-bar text-center">
+
+                    <span class="title-bar-light">secure</span><span class="title-bar-dark">message</span><br>
+                    <span class="title-note">[still in development]</span>
+
+            </div>
+        </a>
+
+
+        <div class="row">
+            {% if user.is_authenticated %}
+                <div class="col-xs-12 text-center big-button-group">
+                    <div class="col-xs-3 col-sm-3">
+
+                            <i class="fa fa-envelope-open" aria-hidden="true"></i>
+
+                    </div>
+                    <div class="col-xs-3 col-sm-3">
+
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+
+                    </div>
+                    <div class="col-xs-3 col-sm-3">
+
+                            <i class="fa fa-address-book" aria-hidden="true"></i>
+
+                    </div><div class="col-xs-3 col-sm-3">
+
+                            <i class="fa fa-user-times" aria-hidden="true"></i>
+
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-xs-12 text-center big-button-group">
+                    <div class="col-xs-12 text-center">
+
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+
+                    </div>
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+    </nav>
+
+
+  {% block content %}
+  {% endblock  %}
+
+<footer>
+     	&#169; Alex Peterson
+</footer>
+
+</body>
+
+</html>

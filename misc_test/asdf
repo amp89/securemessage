@@ -1,0 +1,149 @@
+from Crypto.PublicKey import RSA
+from Crypto import Random
+import uuid
+from pbkdf2 import PBKDF2
+#from settings import....SESSION_PWD_HASH_SALT #TODO
+#from settings import....MSG_SALT #TODO
+import os
+import base64
+
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# --user data--------------------------------------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------------------------------------------------- #
+
+def get_session_hash_password(cleartext_password):
+    session_salt = 'asdf' #TODO
+    return PBKDF2(cleartext_password, session_salt).read(32)
+
+
+def get_new_8_salt():
+    return os.urandom(8)
+
+def get_new_rsa_keyset(session_hashed_password, salt):
+    generator = Random.new().read
+    key = RSA.generate(1024, generator)
+    keyset = {}
+    private_key_pt = key.exportKey(format="PEM", passphrase=session_hashed_password,pkcs=8)
+    public_key_pt = key.exportKey(format="PEM", passphrase=None,pkcs=1)
+    private_key_64 = base64.b64encode(private_key_pt)
+    public_key_64 = base64.b64encode(public_key_pt)
+    keyset['private'] = private_key_64
+    keyset['public'] = public_key_64
+    return keyset
+
+def get_new_user_data(cleartext_password):
+    new_user_data_dict = {}
+    new_user_data_dict['unique_user_id'] = uuid.uuid4()
+    cleartext_password_unicode = cleartext_password.decode('utf-8')
+    session_hashed_password = get_session_hash_password(cleartext_password_unicode)
+    #session hash password
+    #create user salt
+    new_user_data_dict['user_salt'] = get_new_8_salt()
+    #create key
+    new_user_data_dict['keyset'] = get_new_rsa_keyset(session_hashed_password, new_user_data_dict['user_salt'])
+    #get public key
+    #get private key
+    return new_user_data_dict
+
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# --msg data---------------------------------------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------------------------------------------------- #
+
+#encrypt
+def encrypt_message(message_data_dict, reciever_public_key_64):
+    message_text_pt = message_data_dict['message']
+    message_subject_pt = message_data_dict['subject']
+
+    message_text_str = message_text_pt.encode("utf-8")
+    message_subject_str = message_subject_pt.encode("utf-8")
+
+    reciever_public_key_str = base64.b64decode(reciever_public_key_64)
+    reciever_public_key_obj = RSA.importKey(reciever_public_key_str)
+
+    message_text_enc = reciever_public_key_obj.encrypt(message_text_str, 16)[0]
+    message_text_enc_64 = base64.b64encode(message_text_enc)
+
+    message_subject_enc = reciever_public_key_obj.encrypt(message_subject_str, 16)[0]
+    message_subject_enc_64 = base64.b64encode(message_subject_enc)
+
+    encrypted_message_data_dict = {}
+    encrypted_message_data_dict['subject'] = message_subject_enc_64
+    encrypted_message_data_dict['message'] = message_text_enc_64
+
+    salt_256_sig = PBKDF2(message_text_str,'SETTINGMSGSALT').read(256) #TODO
+    salt_256_sig_64 = base64.b64encode(salt_256_sig)
+
+    encrypted_message_data_dict['signature'] = salt_256_sig_64
+
+    return encrypted_message_data_dict
+
+def decrypt_message(ecrypted_message_data_dict, session_hashed_password, reciever_private_key_64):
+
+    message_subject_enc = base64.b64decode(ecrypted_message_data_dict['subject'])
+    message_text_enc = base64.b64decode(ecrypted_message_data_dict['message'])
+    message_signature = base64.b64decode(ecrypted_message_data_dict['signature'])
+
+    reciever_private_key_str_encrypted = base64.b64decode(reciever_private_key_64)
+    reciever_private_key_obj = RSA.importKey(reciever_private_key_str_encrypted,
+                                             passphrase=session_hashed_password)
+
+
+    message_subject = reciever_private_key_obj.decrypt(message_subject_enc)
+    message_text = reciever_private_key_obj.decrypt(message_text_enc)
+
+    message_subject_uni = message_subject.decode('utf-8')
+    print "ATTEMPTING TO DECODE message... {}".format(message_text) #TODO bye bye
+    message_text_uni = message_text.decode('utf-8')
+
+    decrypted_message_data_dict = {}
+    decrypted_message_data_dict['message'] = message_text_uni
+    decrypted_message_data_dict['subject'] = message_subject_uni
+
+    salt_256_sig = PBKDF2(message_text_uni, 'SETTINGMSGSALT').read(256)  # TODO
+    if message_signature == salt_256_sig:
+        decrypted_message_data_dict['has_valid_signature'] = True
+    else:
+        decrypted_message_data_dict['has_valid_signature'] = False
+
+    return decrypted_message_data_dict
+
+
+
+#decrypt
+
+#sign
+
+#verify
+
+def main():
+    user_1_dict = get_new_user_data('user1pwd')
+    user_2_dict = get_new_user_data('user2pwd')
+
+    one_to_two = {}
+    one_to_two['message'] = '~!@#$%^&*()_+=-0987654321`\'""":{:{:{//./.,?>,msdkjfshjdfpoiwherjkghfoiehjrlk;gfd;asdkjlg'\
+                            'helloo lsdkjflsafj lsf stff stf sdkjflsdj fsiafgw ojhg sosj fsodjhpasfjksodghjaslkjdfsds' \
+                            'askjfdjawoerigja;owirjtgpoi3erjtgoiw3pe8riyghjp;wesrjdfg;kjasdgv'
+                                #'line two~!@#$%^&*()_+=-0987654321`\][poi'solved?
+
+
+    # one_to_two['message'] = base64.b64encode(one_to_two['message'])
+    one_to_two['subject'] = 'test_subject'
+
+    print ' -- to send by one... -- '
+    print one_to_two
+
+    one_to_two_enc = encrypt_message(one_to_two, user_2_dict['keyset']['public'])
+
+    print ' -- encrypted -- '
+    print one_to_two_enc
+
+    one_to_two_dec = decrypt_message(one_to_two_enc,get_session_hash_password('user2pwd'),user_2_dict['keyset']['private'])
+
+    print ' -- recieved by two -- '
+    print one_to_two_dec
+
+
+if __name__ == '__main__':
+    main()

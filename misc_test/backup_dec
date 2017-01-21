@@ -1,0 +1,130 @@
+from Crypto.PublicKey import RSA
+
+from Crypto.Cipher import AES
+from Crypto import Random
+from pbkdf2 import PBKDF2
+import os
+import random
+import base64
+
+from django.conf import settings
+
+from django.db import models
+from django.contrib.auth.models import User
+
+from mainpage.models import UserData
+
+#impo
+import unicodedata
+
+class KeyChain(object):
+    @staticmethod
+    def encrypt_message(subject,text,rec_user_obj):
+        #TODO FIX
+        #UserDataClass = models.ForeignKey("UserData")
+        # rec_user_data_obj = rec_user_obj.ForeignKey("mainpage.UserData")
+        rec_user_data_obj = UserData.objects.get(user=rec_user_obj)
+        rec_user_obj = rec_user_data_obj
+        # TODO FIX
+
+        rec_pub_key_enc_str = base64.b64decode(rec_user_obj.public_key)
+        #import this key as a key.
+
+
+        rec_pub_key_enc = RSA.importKey(rec_pub_key_enc_str)#, passphrase=None)
+        enc_sub_str = rec_pub_key_enc.encrypt(str(subject), 16)[0]
+
+        enc_sub = base64.b64encode(enc_sub_str)
+        #TODO fixed above, now fix below
+        print "BEFORE SAVE MESSAGE TYPE: {0}".format(str(type(text)))
+        enc_text = base64.b64encode(rec_pub_key_enc.encrypt(text, 16)[0])
+        return enc_sub, enc_text
+
+    @staticmethod #TODO maybe move this to mainpage.
+    def get_hashes(pwd, logged_in_user_obj):
+        logged_in_user_data_obj = UserData.objects.get(user=logged_in_user_obj)
+
+        aes_hash = PBKDF2(pwd,settings.USER_SALT).read(32)
+        rsa_hash = PBKDF2(pwd,base64.b64decode(logged_in_user_data_obj.inner_salt)).read(32)
+
+        encoded_aes_hash = base64.b64encode(aes_hash)
+        encoded_rsa_hash = base64.b64encode(rsa_hash)
+        return encoded_aes_hash, encoded_rsa_hash
+
+
+    @staticmethod
+    def decrypt_message(hashed_pwds_dict,enc_subject,enc_text,rec_user_obj):
+        rec_user_data_obj = UserData.objects.get(user=rec_user_obj)
+
+        salt = settings.USER_SALT
+        #pwd_hash = PBKDF2(pwd,salt).read(32)
+        pwd_hash = base64.b64decode(hashed_pwds_dict['aes_hash'])
+        enc_pv_key = base64.b64decode(rec_user_data_obj.private_key)
+
+        i_vector = str(bytearray(enc_pv_key)[:16])#.read(16)
+        decryptor = AES.new(pwd_hash, AES.MODE_CBC, i_vector)
+        pv_key = decryptor.decrypt(enc_pv_key)
+        print enc_text
+        enc_text = base64.b64decode(enc_text)
+        enc_subject = base64.b64decode(enc_subject)
+        i_salt = base64.b64decode(rec_user_data_obj.inner_salt)
+        pv_enc_key = pv_key[16:]
+
+        rsa_pwd_hash = PBKDF2('123qwe!@#QWE',i_salt).read(32)
+        rsa_pwd_hash = base64.b64decode(hashed_pwds_dict['rsa_hash'])
+        pv_rsa_key = RSA.importKey(pv_enc_key,passphrase=rsa_pwd_hash)  # , passphrase=None)
+
+
+        print 'ahhh'*100
+        print type(enc_text)
+        pt_subject = pv_rsa_key.decrypt(enc_subject)  # i think here it is giving hte weird text back.. TODO
+        pt_text = pv_rsa_key.decrypt(enc_text.decode('utf-8'))
+
+
+        #pt_subject = pt_subject.decode(encoding='utf-8', errors='replace')
+
+
+        # pt_text = str(pt_text)
+        # pt_subject = str(pt_subject)
+        #
+        print ''
+        print '*'*50
+        print 'pt text tpye: {}'.format(type(pt_text))
+        print '*' * 50
+        print pt_text
+        #print (pt_text.decode('utf-8'))
+        print ' ^ txt  bl sub' * 6
+        print enc_text
+        print '*'*50
+
+        print '*'*50
+
+
+
+
+        print "from db sub type: {}".format(type(pt_subject))
+        print "from db text type: {}".format(type(pt_text))
+
+
+        return pt_text, pt_subject
+
+    @staticmethod
+    def create_signature(pt_text):
+        salt = settings.MESSAGE_SALT
+        text_hash = PBKDF2(pt_text,salt).read(256)
+        return base64.b64encode(text_hash)
+
+    @staticmethod
+    def verify_signature(text,signature,send_user_obj):
+        salt = settings.MESSAGE_SALT
+        text_hash = PBKDF2(text,salt).read(256)
+        is_valid = send_user_obj.public_key.verify(text_hash,base64.b64decode(signature))
+        return is_valid
+
+    @staticmethod
+    def decrypt_email(email_obj, user_obj, hashed_pwds_dict):
+        #todo hashed_pwds_dict instead of what i did
+        print 'dec email.'
+        message, subject = KeyChain.decrypt_message(hashed_pwds_dict, email_obj.subject.encode('utf-8'), email_obj.message_text.encode('utf-8'), user_obj)
+        #TODO verify sig.
+        return {'message':message, 'subject':subject}
