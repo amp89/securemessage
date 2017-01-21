@@ -18,11 +18,13 @@ from django.conf.urls import include
 from django.contrib import admin
 
 from userinfo import urls as userinfo_urls
+from email_app import urls as email_app_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #TODO email
     #General urls will redirect to userinfo app
+    url(r'^email/', include(email_app_urls)),
     url(r'^', include(userinfo_urls)),
 
 
