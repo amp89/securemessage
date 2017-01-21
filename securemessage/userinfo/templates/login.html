@@ -1,0 +1,19 @@
+{% extends parent_template|default:"userinfo_base.html" %}
+
+{% block title %}
+{{ block.super }} | Login
+{% endblock %}
+
+{% block content %}
+<form
+    method="POST"
+    action="{% url 'login_url' %}"
+    >
+
+    {% csrf_token %}
+
+    <input type="text" name="username" />
+    <input type="password" name="password" />
+    <button type="submit">Log In.</button>
+</form>
+{% endblock %}

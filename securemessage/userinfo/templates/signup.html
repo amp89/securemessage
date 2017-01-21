@@ -1,0 +1,14 @@
+{% extends parent_template|default:"userinfo_base.html" %}
+
+{% block content %}
+
+<form
+  method="POST"
+  action = "{% url 'sign_up_url' %}"
+>
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Join NOW!</button>
+</form>
+
+{% endblock %}

@@ -36,6 +36,7 @@ class UserData(models.Model):
 
     )
 
+
     def get_send_email_url(self):
         pass #return reverse('email_to_url',kwargs={'user_uuid':self.unique_identifier})
 
