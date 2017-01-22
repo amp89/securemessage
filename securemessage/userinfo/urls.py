@@ -21,6 +21,13 @@ from .views import Homepage
 from .views import CustomSignIn
 from .views import SignUp
 
+#TODO rm
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+#end TODO rm
+
 urlpatterns = [
     url('^$', Homepage.as_view(), name="home_url" ),
     url('^bad/$', Homepage.as_view(), name="bad_url" ),
@@ -33,7 +40,8 @@ urlpatterns = [
 
 
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) #TODO REMOVE
+
 
 
 
