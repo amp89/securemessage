@@ -1,0 +1,21 @@
+{% extends parent_template|default:"email_app_base.html" %}
+
+{% block title %}
+{{block.super}} | Read message from..... stuff
+
+{% endblock %}
+
+
+{% block content %}
+<div class="content">
+    READ EMAIL
+    <form>
+        {{message_dict}}
+    <input type="text" id="from_username" name="from_username" value="{{message_dict.from_username}}" disabled><br>
+    <input type="text" id="to_username" name="to_username"  value="{{message_dict.to_username}}" disabled><br>
+    <input type="text" id="message_subject" name="message_subject" value="{{message_dict.message_subject}}" disabled><br>
+    <textarea id="message_text" name="message_subject" disabled>{{message_dict.message_text}}</textarea><br>
+        <a href="{{message_dict.reply_url}}">REPLY</a>
+    </form>
+</div>
+{% endblock %}

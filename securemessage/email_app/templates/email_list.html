@@ -1,0 +1,14 @@
+{% extends parent_template|default:"email_app_base.html" %}
+
+
+{% block content %}
+EMAILS
+{% for message in message_list %}
+    {% if message.deleted == 0 %}
+        {{message.send_date}} <a href="{{message.get_absolute_url}}">READ ME</a> <a href="{{message.get_delete_url}}">DELETE ME</a><br>
+    {% endif %}
+
+{% endfor %}
+
+
+{% endblock %}

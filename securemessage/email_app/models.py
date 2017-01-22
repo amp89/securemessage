@@ -24,6 +24,10 @@ class PrivateMessage(models.Model):
         default=0
     )
 
+    disable_search = models.BooleanField(
+        default=0
+    )
+
     send_user = models.ForeignKey(
         User,
         blank = False,
@@ -85,32 +89,27 @@ class PrivateMessage(models.Model):
 
 
     def get_absolute_url(self):
-        pass
-        '''
+
         return reverse('read_email_url', kwargs={
-            'email_uuid':self.unique_identifier
+            'message_uuid':self.unique_identifier
         })
-        '''
+
 
     def get_update_url(self):
         pass
 
     def get_delete_url(self):
-        #TODO hides
-        pass
-        '''
         return reverse('delete_email_url', kwargs={
-            'email_uuid':self.unique_identifier
-        })
-        '''
-
-    def get_reply_url(self):
-        pass
-        '''
-        return reverse("reply_email_url", kwargs={
             'message_uuid':self.unique_identifier
         })
-        '''
+
+
+    def get_reply_url(self):
+
+        return reverse("reply_to_email_url", kwargs={
+            'message_uuid':self.unique_identifier
+        })
+
 
     class Meta:
         ordering = ['send_date']

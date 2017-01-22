@@ -4,8 +4,9 @@ from Crypto.PublicKey import RSA
 from Crypto import Random
 import uuid
 from pbkdf2 import PBKDF2
-#from settings import....SESSION_PWD_HASH_SALT #TODO
-#from settings import....MSG_SALT #TODO
+
+from django.conf import settings #SESSION_PWD_HASH_SALT
+
 import os
 import base64
 
@@ -15,7 +16,7 @@ import base64
 # -------------------------------------------------------------------------------------------------------------------- #
 
 def get_session_hash_password(cleartext_password):
-    session_salt = 'asdf' #TODO
+    session_salt = "asdfsagjkladjhgkjfdhkjdhflkjhflkfhjdfldkj"
     return PBKDF2(cleartext_password, session_salt).read(32)
 
 
@@ -34,7 +35,7 @@ def get_new_rsa_keyset(session_hashed_password):
     key = RSA.generate(1024, generator)
 
     private_key_pt = key.exportKey(format="PEM", passphrase=session_hashed_password,pkcs=8)
-    public_key_pt = key.exportKey(format="PEM", passphrase=None,pkcs=1)
+    public_key_pt = key.publickey().exportKey(format="PEM", passphrase=None,pkcs=1)
 
     keyset = {}
     keyset['private'] = base64.b64encode(private_key_pt)
@@ -49,7 +50,7 @@ def get_new_user_data(cleartext_password):
         cleartext_password (string)
     Returns:
         new_user_data_dict (keys: unique_user_id, user_salt, keyset (keys: public, private))
-                                                                (! both keys base64 encoded for easier storage !)
+                                                            (! both keys and salt base64 encoded for easier storage !)
     """
     new_user_data_dict = {}
 
@@ -57,7 +58,7 @@ def get_new_user_data(cleartext_password):
 
     cleartext_password_unicode = cleartext_password.decode('utf-8')
     session_hashed_password = get_session_hash_password(cleartext_password_unicode)
-    new_user_data_dict['user_salt'] = get_new_8_salt()
+    new_user_data_dict['user_salt'] = base64.b64encode(get_new_8_salt())
     new_user_data_dict['keyset'] = get_new_rsa_keyset(session_hashed_password)
 
     return new_user_data_dict
@@ -109,7 +110,7 @@ def encrypt_message(message_data_dict, reciever_public_key_64):
         message_data_dict (keys: message, subject)
         reciever_public_key_64 (base64 encoded public encryption key for message recipient)
     Returns:
-        encrypted_message_data_dict (keys: subject (encrypted), message (encrypted), signature)
+        encrypted_message_data_dict (keys: subject (encrypted), message (encrypted), signature) all base64encoded
     """
     message_text_pt = message_data_dict['message'].strip()
     message_subject_pt = message_data_dict['subject'].strip()
@@ -134,7 +135,7 @@ def encrypt_message(message_data_dict, reciever_public_key_64):
     encrypted_message_data_dict['subject'] = message_subject_enc_64
     encrypted_message_data_dict['message'] = message_text_enc_64
 
-    message_hash = PBKDF2(message_text_pt,'SETTING-MSG-SALT').read(256) #TODO
+    message_hash = PBKDF2(message_text_pt,'SETTINGMSGSALT').read(256) #TODO
     message_hash_b64 = base64.b64encode(message_hash)
     encrypted_message_data_dict['signature'] = message_hash_b64
 
@@ -173,7 +174,7 @@ def decrypt_message(ecrypted_message_data_dict, session_hashed_password, recieve
     reciever_private_key_str_encrypted = base64.b64decode(reciever_private_key_64)
     reciever_private_key_obj = RSA.importKey(reciever_private_key_str_encrypted, passphrase=session_hashed_password)
 
-    message_text_unicode = decrypt_128_byte_block_str(message_text_enc,reciever_private_key_obj)
+    message_text_unicode = decrypt_128_byte_block_str(message_text_enc,reciever_private_key_obj).strip()
     message_subject_unicode = decrypt_128_byte_block_str(message_subject_enc,reciever_private_key_obj)
 
     decrypted_message_data_dict = {}

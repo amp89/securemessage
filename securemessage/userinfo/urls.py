@@ -23,7 +23,7 @@ from .views import SignUp
 
 urlpatterns = [
     url('^$', Homepage.as_view(), name="home_url" ),
-
+    url('^bad/$', Homepage.as_view(), name="bad_url" ),
 
     url('^login/$', CustomSignIn.as_view(), name="login_url"),
     url(r'^logout/$', views.logout, {'next_page': 'login_url'}, name="logout_url"),

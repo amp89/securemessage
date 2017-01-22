@@ -1,0 +1,22 @@
+{% extends parent_template|default:"email_app_base.html" %}
+
+
+
+
+{% block content %}
+<div class="content">
+    WRITE EMAIL
+    <form
+        method="POST"
+        action="{% url 'send_email_url' %}"
+    >
+    {% csrf_token %}
+
+    <input type="text" id="from_username" name="from_username" value="{{message_dict.from_username}}" disabled><br>
+    <input type="text" id="to_username" name="to_username"  value="{{message_dict.to_username}}"><br>
+    <input type="text" id="message_subject" name="message_subject" value="{{message_dict.message_subject}}" ><br>
+    <textarea id="message_text" name="message_text">{{message_dict.message_text}}</textarea><br>
+    <button type="submit">Send.</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends parent_template|default:"email_app_base.html" %}
+
+
+{% block content %}
+    DIRECTORY
+
+<form
+        method="POST"
+        action="{% url 'directory_url' %}"
+    >
+    {% csrf_token %}
+    <input type="text" name="search_parameter" value="{{search_parameter}}"><button type="submit">Search</button>
+
+</form>
+
+
+{% for user_data in user_data_result_list %}
+
+
+    <a href="{{user_data.get_send_email_url}}">{{user_data.user.username}}</a><br>
+
+{% endfor %}
+
+
+
+
+
+
+
+{% endblock %}
