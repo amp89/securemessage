@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="883a3528-40e2-4079-bc15-04a9c719d798" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/securemessage/static/templates/base.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/email_app/models.py" afterPath="$PROJECT_DIR$/securemessage/email_app/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/email_app/templates/directory.html" afterPath="$PROJECT_DIR$/securemessage/email_app/templates/directory.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/email_app/templates/email_app_base.html" afterPath="$PROJECT_DIR$/securemessage/email_app/templates/email_app_base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/email_app/templates/email_list.html" afterPath="$PROJECT_DIR$/securemessage/email_app/templates/email_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/email_app/templates/read_email.html" afterPath="$PROJECT_DIR$/securemessage/email_app/templates/read_email.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/email_app/templates/write_email.html" afterPath="$PROJECT_DIR$/securemessage/email_app/templates/write_email.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/email_app/views.py" afterPath="$PROJECT_DIR$/securemessage/email_app/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/securemessage/settings.py" afterPath="$PROJECT_DIR$/securemessage/securemessage/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/static/site_base/css/base_css.css" afterPath="$PROJECT_DIR$/securemessage/static/site_base/css/base_css.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/static/site_base/templates/base.html" afterPath="$PROJECT_DIR$/securemessage/static/site_base/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/userinfo/models.py" afterPath="$PROJECT_DIR$/securemessage/userinfo/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/userinfo/templates/home.html" afterPath="$PROJECT_DIR$/securemessage/userinfo/templates/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/userinfo/templates/login.html" afterPath="$PROJECT_DIR$/securemessage/userinfo/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/userinfo/templates/signup.html" afterPath="$PROJECT_DIR$/securemessage/userinfo/templates/signup.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/userinfo/templates/userinfo_base.html" afterPath="$PROJECT_DIR$/securemessage/userinfo/templates/userinfo_base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/securemessage/userinfo/urls.py" afterPath="$PROJECT_DIR$/securemessage/userinfo/urls.py" />
     </list>
     <ignored path="securemessage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,22 +24,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/login.html">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/securemessage/securemessage/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="read_email.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/securemessage/email_app/templates/read_email.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="195">
+              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+              <folding>
+                <element signature="e#647#679#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+            <state relative-caret-position="420">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,45 +66,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/securemessage/email_app/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
               <caret line="90" column="49" selection-start-line="90" selection-start-column="49" selection-end-line="90" selection-end-column="49" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="directory.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/securemessage/email_app/templates/directory.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="142" selection-start-line="18" selection-start-column="142" selection-end-line="18" selection-end-column="142" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userinfo_base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/userinfo_base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="0" selection-start-line="0" selection-start-column="1" selection-end-line="9" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/securemessage/userinfo/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,6 +86,48 @@
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/securemessage/securemessage/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="718">
+              <caret line="142" column="36" selection-start-line="142" selection-start-column="36" selection-end-line="142" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/securemessage/userinfo/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+              <folding>
+                <element signature="e#647#679#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signup.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/signup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="68" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -162,14 +150,12 @@
         <option value="$PROJECT_DIR$/securemessage/securemessage/crypt_helper.py" />
         <option value="$PROJECT_DIR$/securemessage/email_app/utils.py" />
         <option value="$PROJECT_DIR$/securemessage/email_app/urls.py" />
-        <option value="$PROJECT_DIR$/securemessage/userinfo/urls.py" />
         <option value="$PROJECT_DIR$/securemessage/static/site_base/css/reset.css" />
         <option value="$PROJECT_DIR$/securemessage/userinfo/models.py" />
         <option value="$PROJECT_DIR$/securemessage/email_app/templates/email_app_base.html" />
         <option value="$PROJECT_DIR$/securemessage/userinfo/templates/userinfo_base.html" />
         <option value="$PROJECT_DIR$/securemessage/securemessage/settings.py" />
         <option value="$PROJECT_DIR$/securemessage/userinfo/static/css/userinfo_css.css" />
-        <option value="$PROJECT_DIR$/securemessage/userinfo/templates/login.html" />
         <option value="$PROJECT_DIR$/securemessage/userinfo/templates/signup.html" />
         <option value="$PROJECT_DIR$/securemessage/email_app/templates/read_email.html" />
         <option value="$PROJECT_DIR$/securemessage/email_app/templates/directory.html" />
@@ -179,8 +165,10 @@
         <option value="$PROJECT_DIR$/securemessage/email_app/templates/write_email.html" />
         <option value="$PROJECT_DIR$/securemessage/static/site_base/templates/base.html" />
         <option value="$PROJECT_DIR$/securemessage/email_app/models.py" />
-        <option value="$PROJECT_DIR$/securemessage/userinfo/templates/home.html" />
         <option value="$PROJECT_DIR$/securemessage/email_app/views.py" />
+        <option value="$PROJECT_DIR$/securemessage/userinfo/urls.py" />
+        <option value="$PROJECT_DIR$/securemessage/userinfo/templates/login.html" />
+        <option value="$PROJECT_DIR$/securemessage/userinfo/templates/home.html" />
       </list>
     </option>
   </component>
@@ -946,28 +934,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/securemessage/securemessage/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding>
-            <element signature="e#647#679#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/securemessage/email_app/templates/email_app_base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/securemessage/securemessage/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="733">
-          <caret line="142" column="36" selection-start-line="142" selection-start-column="36" selection-end-line="142" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -978,24 +948,6 @@
           <caret line="25" column="60" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="60" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/signup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="34" column="59" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="59" />
-          <folding>
-            <element signature="e#647#679#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1014,14 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="0" selection-start-line="0" selection-start-column="1" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1100,14 +1044,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/securemessage/email_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -1115,6 +1051,58 @@
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/securemessage/securemessage/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="142" column="36" selection-start-line="142" selection-start-column="36" selection-end-line="142" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/securemessage/securemessage/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#647#679#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+          <folding>
+            <element signature="e#647#679#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/securemessage/userinfo/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
