@@ -2,5 +2,70 @@
 
 
   {% block content %}
-        Homepage
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="col-xs-12">
+                        <span class="welcome_text">WELCOME TO SECURE MESSAGE</span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 project_description">
+                <!-- This is temporary - normally I keep the css in its own files -->
+                <style>
+                    .project_description a{
+                        color:blue !important;
+                    }
+
+                    .project_description li{
+                        margin-top:4px;
+                        margin-left:10px;
+                        list-style-type: circle;
+                    }
+                </style>
+                <strong> * I AM STILL WORKING ON THIS PROJECT. IT IS NOT YET COMPLETE. *</strong>
+                    <br>
+                <p>
+                    <strong>What is this?</strong>
+                    <br>
+                    This is a messaging app that allows users to communicate using encrypted messages.  It is written using Python/Django <em>(I still store the data in plaintext as well,
+                    for testing purposes).</em>
+                    <br>
+                    The app works by creating an RSA key for each user when they sign up.  When they sign in, the password is hashed and stored
+                    as a session variable.  This hashed password is used to decrypt their RSA key.  When sending a message, it is encrypted with the recipient's
+                    public key.
+                </p>
+                <p>
+                    <strong>Purpose</strong>
+                    <br>
+                    I created this application to gain hands on experience with Django and further my knowledge of Python (I have done mostly Java for my own projects up until this point).
+                    <br>
+                    I have been playing around with Django for a little while now.  It seems to be a very flexible framework with a lot of cool things built in
+                     that can reduce time spent rewriting code that has been written several times.  I like how it lets the developer focus on the app that they want to make, instead of
+                     creating the same boiler plate code that is used in almost every project.  For example, instead of writing code to ensure the user is logged in prior to performing certain actions,
+                     I can just make my class based views extend the "LoginRequiredMixin", and it is already done for me.  I also really like the Models / ORM, and the forms are usefull
+                     for quick functionality.
+                </p>
+
+                <p>
+                    <strong>What needs to be done...</strong>
+                    <br>
+                    <ul>
+                        <li>The <a href="https://github.com/amp89">github repo</a> is currently private, I will make it public soon</li>
+                        <li>Currently, I have the message size limited to 10,000 characters.  If I copy and paste a lot of characters into a message,
+                         it fails.  I believe this is because I reached the maxiumum size that python allows a list to be (once the github is public, see the decryption library,
+                            where it is converted into a list of bytearrays.) </li>
+                        <li>Add forwarding capability</li>
+                        <li>Use javascript to add a popup to ensure the user wants to delete the email.  Right now, there is one delete button that deletes it all, </li>
+                        <li>Password changing functionality.  Changing the password requires a new key, and re-encrypting all of the exsisting messages for the data using their new public key</li>
+                        <li>Validation, error handling.</li>
+
+
+                    </ul>
+                </p>
+
+
+            </div>
+        </div>
   {% endblock  %}

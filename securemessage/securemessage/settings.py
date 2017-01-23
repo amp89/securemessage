@@ -137,6 +137,10 @@ USE_TZ = True
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/site_base'),
+    os.path.join(BASE_DIR, 'static/bootstrap'),
+    os.path.join(BASE_DIR, 'static/font-awesome'),
+    os.path.join(BASE_DIR, 'email_app/static'),
+    os.path.join(BASE_DIR, 'userinfo/static'),
 )
 
 STATIC_URL = '/static/'

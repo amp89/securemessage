@@ -4,19 +4,46 @@
 
 
 {% block content %}
-<div class="content">
-    WRITE EMAIL
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <div class="col-xs-12">
+                <span class="welcome_text">WRITE</span>
+        </div>
+    </div>
+
     <form
         method="POST"
         action="{% url 'send_email_url' %}"
     >
-    {% csrf_token %}
 
-    <input type="text" id="from_username" name="from_username" value="{{message_dict.from_username}}" disabled><br>
-    <input type="text" id="to_username" name="to_username"  value="{{message_dict.to_username}}"><br>
-    <input type="text" id="message_subject" name="message_subject" value="{{message_dict.message_subject}}" ><br>
-    <textarea id="message_text" name="message_text">{{message_dict.message_text}}</textarea><br>
-    <button type="submit">Send.</button>
+    {% csrf_token %}
+        <div class="col-xs-12 message_wrapper">
+            <div class="col-sm-offset-1 col-sm-10">
+                <label for="from_username">FROM:</label>
+                <input type="text" id="from_username" name="from_username" value="{{message_dict.from_username}}" disabled>
+            </div>
+
+            <div class="col-sm-offset-1 col-sm-10">
+                 <label for="to_username">TO:</label>
+                 <input type="text" id="to_username" name="to_username"  value="{{message_dict.to_username}}">
+            </div>
+            <div class="col-sm-offset-1 col-sm-10 text-center">
+                <a href="{% url 'directory_url' %}">Lookup a user (your message will not be saved)</a>
+            </div>
+            <div class="col-sm-offset-1 col-sm-10">
+                <label for="from_username">Subject:</label>
+                <input type="text" id="message_subject" name="message_subject" value="{{message_dict.message_subject}}" >
+            </div>
+            <div class="col-sm-offset-1 col-sm-10">
+                <label>Message:</label>
+                <small>*MAX 10,000 characters</small>
+                <textarea id="message_text" name="message_text" maxlength="10000">{{message_dict.message_text}}</textarea><br>
+
+            </div>
+            <div class="col-sm-offset-1 col-sm-10">
+                <button class="btn btn-primary send_message_button" type="submit">Send Message</button>
+            </div>
+        </div>
     </form>
 </div>
 {% endblock %}

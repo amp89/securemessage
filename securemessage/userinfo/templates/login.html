@@ -1,19 +1,54 @@
 {% extends parent_template|default:"userinfo_base.html" %}
 
+
+
 {% block title %}
 {{ block.super }} | Login
 {% endblock %}
 
+
+
+
+
 {% block content %}
-<form
-    method="POST"
-    action="{% url 'login_url' %}"
-    >
 
-    {% csrf_token %}
 
-    <input type="text" name="username" />
-    <input type="password" name="password" />
-    <button type="submit">Log In.</button>
-</form>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <div class="col-xs-12">
+                <span class="welcome_text">SIGN IN</span>
+        </div>
+    </div>
+
+    <div class = "col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
+
+
+        <form
+            method="POST"
+            action="{% url 'login_url' %}"
+            >
+
+            {% csrf_token %}
+            <p>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="id_username"/><br>
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="id_password"/><br>
+            </p>
+
+            <div class="col-xs-offset-1 col-xs-10 text-center">
+                <button class="btn btn-warning" type="submit">Login.</button><br> Don't have an account? <a href="{% url 'sign_up_url' %}">Click here to Sign Up.</a>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
 {% endblock %}

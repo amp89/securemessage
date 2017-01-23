@@ -17,17 +17,21 @@
     </title>
 
     {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static '/site_base/css/reset.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/bootstrap/css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/bootstrap/css/bootstrap.css' %}">
+    <!-- reset -->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/reset.css' %}">
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap-theme.css' %}">
+    <!-- fontawesome -->
 
-    <link rel="stylesheet" type="text/css" href="{% static '/site_base/css/base_css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/font-awesome.css' %}">
 
-    <link rel="stylesheet" type="text/css" href="{% static '/font-awesome/css/font-awesome.css' %}">
+    <!-- custom -->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base_css.css' %}">
 
     {% endblock %}
 
-    <!--<script src="{% static '/js/bootstrap.js' %}"></script>-->
+    <script src="{% static '/js/bootstrap.js' %}"></script>
 
 </head>
 
@@ -47,26 +51,48 @@
         <div class="row">
             {% if user.is_authenticated %}
                 <div class="col-xs-12 text-center big-button-group">
-                    <div class="col-xs-3 col-sm-3">
+                    <a href="{% url 'email_list_url' %}">
+                        <div class="col-xs-3 col-sm-3">
 
-                            <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                            <i class="fa fa-envelope-open nav_icon" aria-hidden="true"></i><br>
+                            <span class="nav_title">Email List</span>
 
-                    </div>
-                    <div class="col-xs-3 col-sm-3">
+                        </div>
+                    </a>
+                    <a href="{% url 'send_email_url' %}">
+                        <div class="col-xs-3 col-sm-3">
 
-                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            <i class="fa fa-paper-plane nav_icon" aria-hidden="true"></i><br>
+                            <span class="nav_title">Send Email</span>
 
-                    </div>
-                    <div class="col-xs-3 col-sm-3">
+                        </div>
+                    </a>
+                    <a href="{% url 'directory_url' %}">
+                        <div class="col-xs-3 col-sm-3">
 
-                            <i class="fa fa-address-book" aria-hidden="true"></i>
+                            <i class="fa fa-address-book nav_icon" aria-hidden="true"></i><br>
+                            <span class="nav_title">Directory</span>
+                        </div>
+                    </a>
 
-                    </div><div class="col-xs-3 col-sm-3">
+                    <a href="#">
+                        <a href="{% url 'logout_url' %}">
 
-                            <i class="fa fa-user-times" aria-hidden="true"></i>
+                                <i class="fa fa-user-times nav_icon" aria-hidden="true"></i><br>
+                                <span class="nav_title">Logout</span>
 
-                    </div>
+                        </div>
+                    </a>
                 </div>
+
+            <div class="col-xs-12 text-center">
+
+                <div class="col-xs-12">
+                    {# TODO FIX IMG <img src="{% static '/images/main_bg_image.png' %}">  #}
+                </div>
+
+            </div>
+
             {% else %}
                 <div class="col-xs-12 text-center big-button-group">
                     <div class="col-xs-12 text-center">
@@ -90,7 +116,7 @@
   {% endblock  %}
 
 <footer>
-     	&#169; Alex Peterson
+     	<a href="http://www.alexmpeterson.com/">&#169; Alex Peterson<a/>
 </footer>
 
 </body>

@@ -24,9 +24,6 @@ class PrivateMessage(models.Model):
         default=0
     )
 
-    disable_search = models.BooleanField(
-        default=0
-    )
 
     send_user = models.ForeignKey(
         User,
@@ -70,7 +67,8 @@ class PrivateMessage(models.Model):
     )
 
     """
-    START: THESE (below) NEED TO BE REMOVED FOR THE APP TO BE SECURE
+    START: THESE (below) ARE FOR TESTING ONLY.  MESSAGES ARE ALSO STORED ENCRYPTED
+                                                (subject and message_text fields store encrypted info).
     """
     plaintext_subject = models.CharField(
         max_length = 1000,
@@ -84,7 +82,7 @@ class PrivateMessage(models.Model):
     )
 
     """
-    END: THESE (above) NEED TO BE REMOVED FOR THE APP TO BE SECURE
+    END: THESE (above) ARE FOR TESTING ONLY.  MESSAGES ARE ALSO STORED ENCRYPTED.
     """
 
 

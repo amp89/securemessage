@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ValidationError
+
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
@@ -30,10 +32,12 @@ class Directory(LoginRequiredMixin, View):
 
     def post(self,request):
         search_parameter = request.POST['search_parameter']
+        if len(search_parameter) < 1:
+            return render(request, self.template_name, {'search_parameter': ""})
         try:
             # message_list = PrivateMessage.objects.get(recieve_user = current_user) #TODO check of none
             user_list = User.objects.filter(username__icontains=search_parameter).order_by('username')  # TODO check of none
-            user_data_list = UserData.objects.filter(user__in=user_list)
+            user_data_list = UserData.objects.filter(user__in=user_list, disable_search=False)
         except ObjectDoesNotExist as e_obj:
             user_data_list = []
         print user_data_list
@@ -61,7 +65,7 @@ class SendEmail(LoginRequiredMixin, View):
                 decrypted_message_data_dict = decrypt(reply_to_message_obj, request.session['pk_hash'], request.user)
 
                 reply_subject_text = "RE: {0}".format(decrypted_message_data_dict['subject'])
-                reply_message_text = "\n\n -- ORIGINAL MESSAGE -- \n\n {0}".format(decrypted_message_data_dict['message'])
+                reply_message_text = "\n\n\n -- ORIGINAL MESSAGE -- \n\n {0}".format(decrypted_message_data_dict['message'])
 
 
                 message_dict = {
@@ -106,7 +110,8 @@ class ReadEmail(LoginRequiredMixin, View):
             if current_message.recieve_user == current_user and current_message.deleted == 0:
                 message_data_dict = decrypt(current_message, request.session['pk_hash'], current_user)
                 #subject, message, signature
-
+                current_message.read = True
+                current_message.save()
                 message_dict = {
                     "from_username":current_message.send_user.username,
                     "to_username":current_message.recieve_user.username,
@@ -122,8 +127,6 @@ class ReadEmail(LoginRequiredMixin, View):
         else:
             current_user = request.user
             try:
-                #message_list = PrivateMessage.objects.get(recieve_user = current_user) #TODO check of none
-                #message_list = get_list_or_404(PrivateMessage, recieve_user = current_user) #TODO check of none
                 message_list = PrivateMessage.objects.filter(recieve_user = current_user).order_by("-send_date")
             except ObjectDoesNotExist as e_obj:
                 message_list = []

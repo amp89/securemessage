@@ -2,24 +2,37 @@
 
 
 {% block content %}
-    DIRECTORY
 
-<form
-        method="POST"
-        action="{% url 'directory_url' %}"
-    >
-    {% csrf_token %}
-    <input type="text" name="search_parameter" value="{{search_parameter}}"><button type="submit">Search</button>
+<div class="row">
+    <div class="col-xs-12 text-center">
+            <div class="col-xs-12">
+                    <span class="welcome_text">DIRECTORY</span>
+            </div>
+        </div>
+    <div class="col-xs-offset-1 col-xs-10">
+        <div class="search_bar">
+            <form
+                    method="POST"
+                    action="{% url 'directory_url' %}"
+                >
+                {% csrf_token %}
+                <input type="text" id="search_parameter" name="search_parameter" value="{{search_parameter}}"><button class="btn btn-success" type="submit">Search</button>
 
-</form>
+            </form>
+        </div>
+        <hr>
+        {% for user_data in user_data_result_list %}
+
+            <div class="col-xs-12 directory_result">
+                  <a href="{{user_data.get_send_email_url}}">{{user_data.user.username}} (click to message) <i class="fa fa-send" aria-hidden="true"></i></a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+</div>
 
 
-{% for user_data in user_data_result_list %}
-
-
-    <a href="{{user_data.get_send_email_url}}">{{user_data.user.username}}</a><br>
-
-{% endfor %}
 
 
 

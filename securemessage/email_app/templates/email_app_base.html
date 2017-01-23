@@ -1,1 +1,9 @@
 {% extends parent_template|default:"base.html" %}
+{% load staticfiles %}
+
+    {% block stylesheets %}
+    {{ block.super}}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/email_app_stylesheet.css' %}">
+
+    {% endblock %}

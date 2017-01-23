@@ -7,15 +7,45 @@
 
 
 {% block content %}
-<div class="content">
-    READ EMAIL
-    <form>
-        {{message_dict}}
-    <input type="text" id="from_username" name="from_username" value="{{message_dict.from_username}}" disabled><br>
-    <input type="text" id="to_username" name="to_username"  value="{{message_dict.to_username}}" disabled><br>
-    <input type="text" id="message_subject" name="message_subject" value="{{message_dict.message_subject}}" disabled><br>
-    <textarea id="message_text" name="message_subject" disabled>{{message_dict.message_text}}</textarea><br>
-        <a href="{{message_dict.reply_url}}">REPLY</a>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <div class="col-xs-12">
+                <span class="welcome_text">EMAIL from {{message_dict.from_username}}</span>
+        </div>
+    </div>
+
+    <form
+        method="POST"
+        action="{% url 'send_email_url' %}"
+    >
+
+    {% csrf_token %}
+        <div class="col-xs-12 message_wrapper">
+            <div class="col-sm-offset-1 col-sm-10">
+                <label for="from_username">FROM:</label>
+                <input type="text" id="from_username" name="from_username" value="{{message_dict.from_username}}" disabled>
+            </div>
+
+            <div class="col-sm-offset-1 col-sm-10">
+                 <label for="to_username">TO:</label>
+                 <input type="text" id="to_username" name="to_username"  value="{{message_dict.to_username}}" disabled>
+            </div>
+            <div class="col-sm-offset-1 col-sm-10 text-center">
+                <a href="{% url 'directory_url' %}">Lookup a user (your message will not be saved)</a>
+            </div>
+            <div class="col-sm-offset-1 col-sm-10">
+                <label for="from_username">Subject:</label>
+                <input type="text" id="message_subject" name="message_subject" value="{{message_dict.message_subject}}" disabled>
+            </div>
+            <div class="col-sm-offset-1 col-sm-10">
+                <label>Message:</label>
+                <textarea id="message_text" name="message_text" disabled>{{message_dict.message_text}}</textarea><br>
+
+            </div>
+            <div class="col-sm-offset-1 col-sm-10">
+                <a href="{{message_dict.reply_url}}" class="btn btn-primary send_message_button">Reply</a>
+            </div>
+        </div>
     </form>
 </div>
 {% endblock %}

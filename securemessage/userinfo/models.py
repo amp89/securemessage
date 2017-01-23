@@ -16,6 +16,10 @@ class UserData(models.Model):
         blank=False,
     )
 
+    disable_search = models.BooleanField(
+        default=0
+    )
+
     key_salt = models.CharField(
         max_length=200,
         unique=False,
